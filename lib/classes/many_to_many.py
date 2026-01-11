@@ -124,7 +124,11 @@ class Magazine:
         return set([magazine.author for magazine in self.articles()])
 
     def article_titles(self):
-        pass
+        articles = [
+            article for article in Article.all if article.magazine == self]
+        if not articles:
+            return None
+        return [article.title for article in articles]
 
     def contributing_authors(self):
         pass
