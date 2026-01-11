@@ -21,37 +21,33 @@ class Article:
         return self._author
 
     @author.setter
-    def author(self, value):
-        self._author = value
+    def author(self, author):
+        self._author = author
 
     @property
     def magazine(self):
         return self._magazine
 
     @magazine.setter
-    def magazine(self, value):
-        self._magazine = value
+    def magazine(self, magazine):
+        self._magazine = magazine
 
 
 class Author:
     def __init__(self, name):
-        # validate type
-        if not isinstance(name, str):
-            raise Exception("Name must be a string")
-
-        # validate length
-        if len(name) < 1:
-            raise Exception("Name must be longer than 0 characters")
-
-        # prevent reassignment
-        if hasattr(self, "_name"):
-            raise Exception("Name cannot be changed after initialization")
-
-        self._name = name
+        if isinstance(name, str) and len(name) > 0:
+            self._name = name
 
     @property
     def name(self):
         return self._name
+
+    @name.setter
+    def name(self, name):
+        # validate type
+        # if isinstance(name, str) and len(name) > 0:
+        #     self._name = name
+        pass
 
     def articles(self):
         return [article for article in Article.all if article.author == self]
@@ -93,7 +89,7 @@ class Magazine:
     @category.setter
     def category(self, category):
         # validate type
-        if isinstance(category, str) and len(category) < 1:
+        if isinstance(category, str) and len(category) > 0:
             self._category = category
 
     def articles(self):
