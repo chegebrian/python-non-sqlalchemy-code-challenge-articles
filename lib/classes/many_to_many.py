@@ -4,25 +4,17 @@ class Article:
     def __init__(self, author, magazine, title):
         self._author = author
         self._magazine = magazine
-        Article.all.append(self)
-        # validate type
-        if not isinstance(title, str):
-            raise Exception("Title must be a string")
-
-        # validate length
-        if not (5 <= len(title) <= 50):
-            raise Exception(
-                "Titles must be between 5 and 50 characters, inclusive")
-
-        # prevent reassignment if already set
-        if hasattr(self, "_title"):
-            raise Exception("Title cannot be changed after initialization")
-
         self._title = title
+        Article.all.append(self)
 
     @property
     def title(self):
         return self._title
+
+    @title.setter
+    def title(self, title):
+        if isinstance(title, str) and (5 <= len(title) <= 50):
+            self._title = title
 
     @property
     def author(self):
