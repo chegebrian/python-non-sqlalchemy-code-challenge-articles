@@ -83,15 +83,8 @@ class Magazine:
     @name.setter
     def name(self, name):
         # validate type
-        if not isinstance(name, str):
-            raise Exception("name must be a string")
-
-        # validate length
-        if not (2 <= len(name) <= 16):
-            raise Exception(
-                "Names must be between 2 and 16 characters, inclusive")
-
-        self._name = name
+        if isinstance(name, str) and (2 <= len(name) <= 16):
+            self._name = name
 
     @property
     def category(self):
@@ -100,14 +93,8 @@ class Magazine:
     @category.setter
     def category(self, category):
         # validate type
-        if not isinstance(category, str):
-            raise Exception("category must be a string")
-
-        # validate length
-        if len(category) < 1:
-            raise Exception("category must be longer than 0 characters")
-
-        self._category = category
+        if isinstance(category, str) and len(category) < 1:
+            self._category = category
 
     def articles(self):
         return [article for article in Article.all if article.magazine == self]
