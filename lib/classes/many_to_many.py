@@ -3,10 +3,27 @@ class Article:
         self.author = author
         self.magazine = magazine
         self.title = title
-        
+
+
 class Author:
     def __init__(self, name):
-        self.name = name
+        # validate type
+        if not isinstance(name, str):
+            raise Exception("Name must be a string")
+
+        # validate length
+        if len(name) < 1:
+            raise Exception("Name must be longer than 0 characters")
+
+        # prevent reassignment
+        if hasattr(self, "_name"):
+            raise Exception("Name cannot be changed after initialization")
+
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
 
     def articles(self):
         pass
@@ -19,6 +36,7 @@ class Author:
 
     def topic_areas(self):
         pass
+
 
 class Magazine:
     def __init__(self, name, category):
