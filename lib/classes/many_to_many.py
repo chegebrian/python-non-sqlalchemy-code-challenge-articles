@@ -1,7 +1,10 @@
 class Article:
+    all = []
+
     def __init__(self, author, magazine, title):
         self.author = author
         self.magazine = magazine
+        Article.all.append(self)
         # validate type
         if not isinstance(title, str):
             raise Exception("Title must be a string")
@@ -43,10 +46,10 @@ class Author:
         return self._name
 
     def articles(self):
-        pass
+        return [article for article in Article.all if article.author == self]
 
     def magazines(self):
-        pass
+        return set([magazine.magazine for magazine in self.articles()])
 
     def add_article(self, magazine, title):
         pass
