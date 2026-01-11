@@ -97,10 +97,10 @@ class Magazine:
         self._category = category
 
     def articles(self):
-        pass
+        return [article for article in Article.all if article.magazine == self]
 
     def contributors(self):
-        pass
+        return set([magazine.author for magazine in self.articles()])
 
     def article_titles(self):
         pass
