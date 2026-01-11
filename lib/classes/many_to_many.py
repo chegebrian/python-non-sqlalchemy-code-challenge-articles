@@ -131,4 +131,15 @@ class Magazine:
         return [article.title for article in articles]
 
     def contributing_authors(self):
-        pass
+        articles = [
+            article for article in Article.all if article.magazine == self]
+        if not articles:
+            return None
+        # count how many articles each author has
+        counts = {}
+        for article in articles:
+            author = article.author
+            counts[author] = counts.get(author, 0) + 1
+        # return authors with more than 2 articles
+        result = [author for author, count in counts.items() if count > 2]
+        return result if result else None
