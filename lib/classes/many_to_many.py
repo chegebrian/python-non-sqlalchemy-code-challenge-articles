@@ -2,8 +2,8 @@ class Article:
     all = []
 
     def __init__(self, author, magazine, title):
-        self.author = author
-        self.magazine = magazine
+        self._author = author
+        self._magazine = magazine
         Article.all.append(self)
         # validate type
         if not isinstance(title, str):
@@ -24,6 +24,21 @@ class Article:
     def title(self):
         return self._title
 
+    @property
+    def author(self):
+        return self._author
+
+    @author.setter
+    def author(self, value):
+        self._author = value
+
+    @property
+    def magazine(self):
+        return self._magazine
+
+    @magazine.setter
+    def magazine(self, value):
+        self._magazine = value
 
 class Author:
     def __init__(self, name):
