@@ -2,7 +2,24 @@ class Article:
     def __init__(self, author, magazine, title):
         self.author = author
         self.magazine = magazine
-        self.title = title
+        # validate type
+        if not isinstance(title, str):
+            raise Exception("Title must be a string")
+
+        # validate length
+        if not (5 <= len(title) <= 50):
+            raise Exception(
+                "Titles must be between 5 and 50 characters, inclusive")
+
+        # prevent reassignment if already set
+        if hasattr(self, "_title"):
+            raise Exception("Title cannot be changed after initialization")
+
+        self._title = title
+
+    @property
+    def title(self):
+        return self._title
 
 
 class Author:
@@ -40,8 +57,41 @@ class Author:
 
 class Magazine:
     def __init__(self, name, category):
-        self.name = name
-        self.category = category
+        self._category = category
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        # validate type
+        if not isinstance(name, str):
+            raise Exception("name must be a string")
+
+        # validate length
+        if not (2 <= len(name) <= 16):
+            raise Exception(
+                "Names must be between 2 and 16 characters, inclusive")
+
+        self._name = name
+
+    @property
+    def category(self):
+        return self._category
+
+    @category.setter
+    def category(self, category):
+        # validate type
+        if not isinstance(category, str):
+            raise Exception("category must be a string")
+
+        # validate length
+        if len(category) < 1:
+            raise Exception("category must be longer than 0 characters")
+
+        self._category = category
 
     def articles(self):
         pass
