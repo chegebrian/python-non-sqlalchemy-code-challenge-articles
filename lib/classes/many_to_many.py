@@ -40,6 +40,7 @@ class Article:
     def magazine(self, value):
         self._magazine = value
 
+
 class Author:
     def __init__(self, name):
         # validate type
@@ -67,7 +68,7 @@ class Author:
         return set([magazine.magazine for magazine in self.articles()])
 
     def add_article(self, magazine, title):
-        pass
+        return Article(self, magazine, title)
 
     def topic_areas(self):
         pass
